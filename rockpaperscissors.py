@@ -66,7 +66,7 @@ resetButton = tk.Button(root, text="Reset", command=reset)
 exitButton = tk.Button(root, text="Exit", command=quit)
 
 # Create a label to prompt user input
-promptLabel = tk.Label(root, text="Please select Rock, Paper, or Scissors")
+promptLabel = tk.Label(root, text="Try to defeat the computer, Please select Rock, Paper, or Scissors")
 
 # Uses grid to build the game window with buttons and labels
 promptLabel.grid(row=0, column=0, columnspan=3, padx=20, pady=10)
