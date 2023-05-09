@@ -44,6 +44,12 @@ def reset():
 def quit():
     root.destroy()
 
+# Function to display the rules of the game
+def Rules():
+    howToPlay = "Each player chooses either rock, paper or scissors. \n\nThe rules are: \n\nRock beats Scissors \nScissors beats Paper \nPaper beats Rock\
+    \n\nThe winner is the one who wins best out of three rounds. Good Luck!"
+    messagebox.showinfo("How to Play", howToPlay)
+
 # Create the main window
 root = tk.Tk()
 root.title("Rock Paper Scissors")
@@ -65,6 +71,9 @@ resultLabel = tk.Label(root, textvariable=resultText)
 resetButton = tk.Button(root, text="Reset", command=reset)
 exitButton = tk.Button(root, text="Exit", command=quit)
 
+# Create the How to Play button
+howToPlayButton = tk.Button(root, text="How to Play", command=Rules)
+
 # Create a label to prompt user input
 promptLabel = tk.Label(root, text="Try to defeat the computer, Please select Rock, Paper, or Scissors")
 
@@ -76,5 +85,6 @@ scissorsButton.grid(row=1, column=2, padx=20, pady=10)
 resultLabel.grid(row=2, column=0, columnspan=3, padx=20, pady=10)
 resetButton.grid(row=3, column=0, pady=10)
 exitButton.grid(row=3, column=2, pady=10)
+howToPlayButton.grid(row=3, column=1, pady=10)
 
 root.mainloop()
