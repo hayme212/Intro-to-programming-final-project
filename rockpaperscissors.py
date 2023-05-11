@@ -40,19 +40,18 @@ def handleChoice(playerChoice):
 
     roundText.set(f"Round: {roundsPlayed}")    
 
-    # Determines if 3 rounds have been completed yet
-    if roundsPlayed == 4:
+    # Determines if player or computer have won yet and adds to the overall score of the winner
+    if playerScore == 2 or computerScore == 2:
         if playerScore > computerScore:
             overall_winner = "Player"
             playerOverallScore += 1
         elif computerScore > playerScore:
             overall_winner = "Computer"
             computerOverallScore += 1
-        else:
-            overall_winner = "No one"
 
         updateScoreBoard()
         disableButtons()
+        roundLabel.grid_remove()
 
     # Create a new Toplevel window for the result
     resultWindow = tk.Toplevel(root)
@@ -69,7 +68,7 @@ def handleChoice(playerChoice):
     playerChoiceLabel = tk.Label(resultWindow, text=f"Player chose: {playerChoice}")
     computerChoiceLabel = tk.Label(resultWindow, text=f"Computer chose: {computerChoice}")
 
-    # Create winner_label with different text depending on the result
+    # Create winnerLabel with different text depending on the result
     if winner == "Tie":
         winnerLabel = tk.Label(resultWindow, text="It's a tie! The round doesn't count.")
     else:
@@ -91,7 +90,8 @@ def handleChoice(playerChoice):
     resultWindow.grab_set()
     root.wait_window(resultWindow)
 
-    if roundsPlayed == 4:
+    # Displays Final results after round results
+    if playerScore == 2 or computerScore == 2:
         messagebox.showinfo("Final Result", f"Final Score: \nComputer: {computerScore}\nPlayer: {playerScore}\n{overall_winner} wins!")
 
             
@@ -124,9 +124,11 @@ def reset():
 
     playerScore = 0
     computerScore = 0
-    roundsPlayed = 0
-    roundText.set("")
+    roundsPlayed = 1
+    roundText.set(f"Round: {roundsPlayed}")
     enableButtons()
+
+    roundLabel.grid(row=1, column=0, columnspan=3, padx=20, pady=10)
 
 # Function to disable buttons
 def disableButtons():
@@ -180,6 +182,7 @@ promptLabel = tk.Label(root, text="Try to defeat the computer in a best of 3 mat
 
 # Create string variable to store round number and label to display
 roundText = tk.StringVar() # Stores round number
+roundText.set(f"Round: {roundsPlayed}")
 roundLabel = tk.Label(root, textvariable=roundText)
 
 # Create a StringVar to store score board and Label for the score board
